@@ -115,9 +115,6 @@ export default function WeighBridgeReceiptForm() {
             <div className="space-y-2">
               <Label htmlFor="partyRef">Party Ref.</Label>
               <Input id="partyRef" {...register("partyRef")} />
-              {errors.partyRef && (
-                <p className="text-sm text-red-500">{errors.partyRef.message}</p>
-              )}
             </div>
           </div>
 
