@@ -234,7 +234,7 @@ export function PDFTemplate({ data }: PDFTemplateProps) {
         <View style={styles.dottedLine} />
 
         <View style={styles.signature}>
-          <Text style={styles.signatureLabel}>OPERATOR'S SIGNATURE:</Text>
+          <Text style={styles.signatureLabel}>OPERATORS SIGNATURE:</Text>
           {/* <View style={styles.signatureLine} /> */}
         </View>
 
