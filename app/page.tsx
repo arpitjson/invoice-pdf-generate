@@ -43,12 +43,6 @@ export default function WeighBridgeReceiptForm() {
     setValue("grossWeight", gross)
   }, [tareWeight, netWeight, setValue])
 
-  const refreshTime = () => {
-    const now = new Date()
-    setValue("outDate", format(now, "dd-MM-yyyy"))
-    setValue("outTime", format(now, "HH:mm"))
-  }
-
   const onSubmit = async (data: WeighBridgeForm) => {
     try {
       setIsGenerating(true)
