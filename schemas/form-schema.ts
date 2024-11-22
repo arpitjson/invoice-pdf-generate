@@ -6,7 +6,7 @@ export const weighBridgeSchema = z.object({
   vehicleType: z.string().min(1, "Vehicle type is required"),
   charges: z.string().min(1, "Charges are required"),
   material: z.string().min(1, "Material is required"),
-  partyRef: z.string().min(1, "Party reference is required"),
+  partyRef: z.string().optional(),
   payment: z.string().min(1, "Payment details are required"),
   driver: z.string().min(1, "Driver name is required"),
   grossWeight: z.string().min(1, "Gross weight is required"),
