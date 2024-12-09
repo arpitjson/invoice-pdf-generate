@@ -3,66 +3,45 @@ import type { WeighBridgeForm } from '../types/form'
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    padding: 60,
     fontSize: 10,
     fontFamily: 'Helvetica',
-    position: 'relative',
+  },
+  receiptSection: {
+    marginBottom: 50,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center',
-    backgroundColor: "#ffcdd2",
-    padding: 10,
-    borderRadius: 4,
   },
   title: {
-    fontSize: 20,
-    marginBottom: 5,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   subtitle: {
-    fontSize: 12,
-    marginBottom: 5,
+    fontSize: 10,
+    marginTop: 2,
   },
   approval: {
     fontSize: 10,
-    marginBottom: 10,
+    marginTop: 2,
   },
   dottedLine: {
     borderBottomWidth: 1,
     borderBottomColor: '#000',
     borderBottomStyle: 'dotted',
-    marginVertical: 10,
-    width: '100%',
-  },
-  infoSection: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   row: {
     flexDirection: 'row',
-    marginBottom: 5,
-    alignItems: 'flex-start',
-    width: '100%',
+    marginVertical: 2,
   },
-  twoColumnRow: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    alignItems: 'flex-start',
-    width: '100%',
-  },
-  twoColumn: {
-    width: '50%',
-    flexDirection: 'row',
+  col3: {
+    flex: 1,
     paddingRight: 10,
-  },
-  singleColumn: {
-    width: '100%',
-    flexDirection: 'row',
-    paddingRight: 10,
-    marginBottom: 5,
   },
   label: {
-    width: 80,
+    width: 100,
     fontWeight: 'bold',
   },
   colon: {
@@ -72,70 +51,26 @@ const styles = StyleSheet.create({
   value: {
     flex: 1,
   },
-  weightSection: {
-    marginVertical: 10,
-  },
   weightRow: {
     flexDirection: 'row',
-    marginBottom: 5,
-    alignItems: 'center',
-    width: '100%',
+    marginVertical: 2,
   },
   weightLabel: {
-    width: 100,
+    width: 120,
     fontWeight: 'bold',
   },
-  weightColon: {
-    width: 10,
-    marginRight: 2,
-  },
   weightValue: {
-    width: 100,
+    width: 80,
   },
   datetime: {
     flex: 1,
     textAlign: 'right',
-    paddingRight: 20,
   },
   signature: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 10,
   },
   signatureLabel: {
     fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  signatureLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-    borderBottomStyle: 'dotted',
-    marginTop: 20,
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 50,
-    left: 30,
-    right: 30,
-    textAlign: 'center',
-  },
-  footerText: {
-    fontSize: 8,
-    color: '#666',
-    fontStyle: 'italic',
-  },
-  notes: {
-    marginTop: 10,
-    padding: 5,
-    borderTop: '1pt solid #ccc',
-  },
-  notesTitle: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginBottom: 2,
-  },
-  notesText: {
-    fontSize: 8,
-    color: '#666',
   },
 })
 
@@ -143,110 +78,89 @@ interface PDFTemplateProps {
   data: WeighBridgeForm
 }
 
+const Receipt = ({ data }: PDFTemplateProps) => (
+  <View style={styles.receiptSection}>
+    <View style={styles.header}>
+      <Text style={styles.title}>MAA TARA COMPUTERISED WEIGH BRIDGE</Text>
+      <Text style={styles.subtitle}>BANSARA, MORE, RANIGANJ, (WEST BENGAL)</Text>
+      <Text style={styles.approval}>CAP.80MT APPROVED BY GOVT. WEST BENGAL (INDIA)</Text>
+    </View>
+
+    <View style={styles.dottedLine} />
+
+    <View style={styles.row}>
+      <View style={styles.col3}>
+        <Text>SERIAL NO. : {data.serialNo}</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>VECH. NO. : {data.vehicleNo}</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>VECH. TYPE: WHEELER</Text>
+      </View>
+    </View>
+
+    <View style={styles.row}>
+      <View style={styles.col3}>
+        <Text>CHARGES : {data.charges}/-</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>MATERIAL : {data.material}</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>PARTY REF.: {data.partyRef}</Text>
+      </View>
+    </View>
+
+    <View style={styles.row}>
+      <View style={styles.col3}>
+        <Text>PAYMENT : {data.payment}</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>DRIVER. : {data.driver}</Text>
+      </View>
+      <View style={styles.col3}>
+        <Text>{data.outDate}</Text>
+      </View>
+    </View>
+
+    <View style={styles.weightRow}>
+      <Text style={styles.weightLabel}>GROSS WEIGHT</Text>
+      <Text style={styles.colon}>:</Text>
+      <Text style={styles.weightValue}>{data.grossWeight} Kg</Text>
+      <Text style={styles.datetime}>{data.outDate},{data.outTime}</Text>
+    </View>
+
+    <View style={styles.weightRow}>
+      <Text style={styles.weightLabel}>TARE WEIGHT</Text>
+      <Text style={styles.colon}>:</Text>
+      <Text style={styles.weightValue}>{data.tareWeight} Kg</Text>
+      <Text style={styles.datetime}>{data.outDate},{data.outTime}</Text>
+    </View>
+
+    <View style={styles.weightRow}>
+      <Text style={styles.weightLabel}>NET WEIGHT</Text>
+      <Text style={styles.colon}>:</Text>
+      <Text style={styles.weightValue}>{data.netWeight} Kg</Text>
+    </View>
+
+    <View style={styles.dottedLine} />
+
+    <View style={styles.signature}>
+      <Text style={styles.signatureLabel}>OPERATOR'S SIGNATURE:</Text>
+    </View>
+
+    <View style={styles.dottedLine} />
+  </View>
+)
+
 export function PDFTemplate({ data }: PDFTemplateProps) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Maa Tara Computerised Weigh Bridge</Text>
-          <Text style={styles.subtitle}>Bansara, more, Raniganj, (West Bengal)</Text>
-          <Text style={styles.approval}>CAP.80MT APPROVED BY GOVT. WEST BENGAL (INDIA)</Text>
-        </View>
-
-        <View style={styles.dottedLine} />
-
-        <View style={styles.infoSection}>
-          <View style={styles.twoColumnRow}>
-            <View style={styles.twoColumn}>
-              <Text style={styles.label}>SERIAL NO.</Text>
-              <Text style={styles.colon}>:</Text>
-              <Text style={styles.value}>{data.serialNo}</Text>
-            </View>
-            <View style={styles.twoColumn}>
-              <Text style={styles.label}>VECH. NO.</Text>
-              <Text style={styles.colon}>:</Text>
-              <Text style={styles.value}>{data.vehicleNo}</Text>
-            </View>
-          </View>
-
-          <View style={styles.twoColumnRow}>
-            <View style={styles.twoColumn}>
-              <Text style={styles.label}>CHARGES</Text>
-              <Text style={styles.colon}>:</Text>
-              <Text style={styles.value}>{data.charges} /-</Text>
-            </View>
-            <View style={styles.twoColumn}>
-              <Text style={styles.label}>MATERIAL</Text>
-              <Text style={styles.colon}>:</Text>
-              <Text style={styles.value}>{data.material}</Text>
-            </View>
-          </View>
-
-          <View style={styles.singleColumn}>
-            <Text style={styles.label}>VECH. TYPE</Text>
-            <Text style={styles.colon}>:</Text>
-            <Text style={styles.value}>{data.vehicleType}</Text>
-          </View>
-
-          <View style={styles.singleColumn}>
-            <Text style={styles.label}>PARTY REF.</Text>
-            <Text style={styles.colon}>:</Text>
-            <Text style={styles.value}>{data.partyRef}</Text>
-          </View>
-
-          <View style={styles.singleColumn}>
-            <Text style={styles.label}>PAYMENT MODE</Text>
-            <Text style={styles.colon}>:</Text>
-            <Text style={styles.value}>{data.payment}</Text>
-          </View>
-
-          <View style={styles.singleColumn}>
-            <Text style={styles.label}>DRIVER</Text>
-            <Text style={styles.colon}>:</Text>
-            <Text style={styles.value}>{data.driver}</Text>
-          </View>
-        </View>
-
-        <View style={styles.dottedLine} />
-
-        <View style={styles.weightSection}>
-          <View style={styles.weightRow}>
-            <Text style={styles.weightLabel}>GROSS WEIGHT</Text>
-            <Text style={styles.weightColon}>:</Text>
-            <Text style={styles.weightValue}>{data.grossWeight} Kg</Text>
-            <Text style={styles.datetime}>{data.outDate},{data.outTime}</Text>
-          </View>
-
-          <View style={styles.weightRow}>
-            <Text style={styles.weightLabel}>TARE WEIGHT</Text>
-            <Text style={styles.weightColon}>:</Text>
-            <Text style={styles.weightValue}>{data.tareWeight} Kg</Text>
-            <Text style={styles.datetime}>{data.inDate},{data.inTime}</Text>
-          </View>
-
-          <View style={styles.weightRow}>
-            <Text style={styles.weightLabel}>NET WEIGHT</Text>
-            <Text style={styles.weightColon}>:</Text>
-            <Text style={styles.weightValue}>{data.netWeight} Kg</Text>
-          </View>
-        </View>
-
-        <View style={styles.dottedLine} />
-
-        <View style={styles.signature}>
-          <Text style={styles.signatureLabel}>OPERATORS SIGNATURE:</Text>
-          {/* <View style={styles.signatureLine} /> */}
-        </View>
-
-        <View style={styles.notes}>
-          <Text style={styles.notesTitle}>Notes</Text>
-          <Text style={styles.notesText}>It was great doing business with you.</Text>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Thank you for choosing Maa Tara Computerised Weigh Bridge</Text>
-          <Text style={styles.footerText}>We value your trust in our services</Text>
-        </View>
+        <Receipt data={data} />
+        <Receipt data={data} />
+        <Receipt data={data} />
       </Page>
     </Document>
   )
