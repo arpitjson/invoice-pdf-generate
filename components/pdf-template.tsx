@@ -1,13 +1,13 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
-import type { WeighBridgeForm } from '../types/form'
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import type { WeighBridgeForm } from '../types/form';
 
 const styles = StyleSheet.create({
   page: {
-    padding: 60,
+    padding: 40,
     fontSize: 10,
     fontFamily: 'Helvetica',
   },
-  receiptSection: {
+  receiptContainer: {
     marginBottom: 50,
   },
   header: {
@@ -27,59 +27,60 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   dottedLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-    borderBottomStyle: 'dotted',
+    borderBottom: '1px dotted #000',
     marginVertical: 5,
   },
   row: {
     flexDirection: 'row',
     marginVertical: 2,
   },
-  col3: {
+  column: {
     flex: 1,
-    paddingRight: 10,
+    flexDirection: 'row',
   },
   label: {
     width: 100,
-    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   colon: {
-    width: 10,
+    width: 8,
     marginRight: 2,
   },
   value: {
     flex: 1,
+  },
+  centerText: {
+    textAlign: 'center',
+    marginVertical: 2,
   },
   weightRow: {
     flexDirection: 'row',
     marginVertical: 2,
   },
   weightLabel: {
-    width: 120,
-    fontWeight: 'bold',
+    width: 100,
+    textTransform: 'uppercase',
   },
   weightValue: {
     width: 80,
   },
-  datetime: {
+  weightDateTime: {
     flex: 1,
     textAlign: 'right',
   },
   signature: {
     marginTop: 10,
+    textTransform: 'uppercase',
   },
-  signatureLabel: {
-    fontWeight: 'bold',
-  },
-})
+});
 
 interface PDFTemplateProps {
-  data: WeighBridgeForm
+  data: WeighBridgeForm;
 }
 
 const Receipt = ({ data }: PDFTemplateProps) => (
-  <View style={styles.receiptSection}>
+  <View style={styles.receiptContainer}>
+    {/* Header Section */}
     <View style={styles.header}>
       <Text style={styles.title}>MAA TARA COMPUTERISED WEIGH BRIDGE</Text>
       <Text style={styles.subtitle}>BANSARA, MORE, RANIGANJ, (WEST BENGAL)</Text>
@@ -88,80 +89,102 @@ const Receipt = ({ data }: PDFTemplateProps) => (
 
     <View style={styles.dottedLine} />
 
+    {/* Details Section */}
     <View style={styles.row}>
-      <View style={styles.col3}>
-        <Text>SERIAL NO. : {data.serialNo}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Serial No.</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.serialNo}</Text>
       </View>
-      <View style={styles.col3}>
-        <Text>VECH. NO. : {data.vehicleNo}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Vech. No.</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.vehicleNo}</Text>
       </View>
-      <View style={styles.col3}>
-        <Text>VECH. TYPE: WHEELER</Text>
-      </View>
-    </View>
-
-    <View style={styles.row}>
-      <View style={styles.col3}>
-        <Text>CHARGES : {data.charges}/-</Text>
-      </View>
-      <View style={styles.col3}>
-        <Text>MATERIAL : {data.material}</Text>
-      </View>
-      <View style={styles.col3}>
-        <Text>PARTY REF.: {data.partyRef}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Vech. Type</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.vehicleType}</Text>
       </View>
     </View>
 
     <View style={styles.row}>
-      <View style={styles.col3}>
-        <Text>PAYMENT : {data.payment}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Charges</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.charges} /-</Text>
       </View>
-      <View style={styles.col3}>
-        <Text>DRIVER. : {data.driver}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Material</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.material}</Text>
       </View>
-      <View style={styles.col3}>
-        <Text>{data.outDate}</Text>
+      <View style={styles.column}>
+        <Text style={styles.label}>Party Ref.</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.partyRef}</Text>
       </View>
     </View>
 
-    <View style={styles.weightRow}>
-      <Text style={styles.weightLabel}>GROSS WEIGHT</Text>
-      <Text style={styles.colon}>:</Text>
-      <Text style={styles.weightValue}>{data.grossWeight} Kg</Text>
-      <Text style={styles.datetime}>{data.outDate},{data.outTime}</Text>
+    <View style={styles.row}>
+      <View style={styles.column}>
+        <Text style={styles.label}>Payment</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.payment}</Text>
+      </View>
+      <View style={styles.column}>
+        {/* Empty middle column */}
+      </View>
+      <View style={styles.column}>
+        <Text style={styles.label}>Driver</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.value}>{data.driver}</Text>
+      </View>
     </View>
 
-    <View style={styles.weightRow}>
-      <Text style={styles.weightLabel}>TARE WEIGHT</Text>
-      <Text style={styles.colon}>:</Text>
-      <Text style={styles.weightValue}>{data.tareWeight} Kg</Text>
-      <Text style={styles.datetime}>{data.outDate},{data.outTime}</Text>
-    </View>
+    <Text style={styles.centerText}>{data.inDate}</Text>
 
-    <View style={styles.weightRow}>
-      <Text style={styles.weightLabel}>NET WEIGHT</Text>
-      <Text style={styles.colon}>:</Text>
-      <Text style={styles.weightValue}>{data.netWeight} Kg</Text>
+    {/* Weight Section */}
+    <View>
+      <View style={styles.weightRow}>
+        <Text style={styles.weightLabel}>Gross Weight</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.weightValue}>{data.grossWeight} Kg</Text>
+        <Text style={styles.centerText}>
+          {data.inDate}, {data.inTime}
+        </Text>
+      </View>
+      <View style={styles.weightRow}>
+        <Text style={styles.weightLabel}>Tare Weight</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.weightValue}>{data.tareWeight} Kg</Text>
+        <Text style={styles.centerText}>
+          {data.outDate}, {data.outTime}
+        </Text>
+      </View>
+      <View style={styles.weightRow}>
+        <Text style={styles.weightLabel}>Net Weight</Text>
+        <Text style={styles.colon}>:</Text>
+        <Text style={styles.weightValue}>{data.netWeight} Kg</Text>
+      </View>
     </View>
 
     <View style={styles.dottedLine} />
 
-    <View style={styles.signature}>
-      <Text style={styles.signatureLabel}>OPERATORS SIGNATURE:</Text>
-    </View>
-
+    {/* Signature Section */}
+    <Text style={styles.signature}>Operators Signature:</Text>
     <View style={styles.dottedLine} />
   </View>
-)
+);
 
 export function PDFTemplate({ data }: PDFTemplateProps) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Receipt data={data} />
-        <Receipt data={data} />
-        <Receipt data={data} />
+        {[...Array(3)].map((_, index) => (
+          <Receipt data={data} key={index} />
+        ))}
       </Page>
     </Document>
-  )
+  );
 }
