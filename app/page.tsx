@@ -91,9 +91,9 @@ export default function WeighBridgeReceiptForm() {
             <div className="space-y-2">
               <Label htmlFor="vehicleType">Vehicle Type</Label>
               <Input id="vehicleType" {...register("vehicleType")} />
-              {errors.vehicleType && (
+              {/* {errors.vehicleType && (
                 <p className="text-sm text-red-500">{errors.vehicleType.message}</p>
-              )}
+              )} */}
             </div>
           </div>
 
