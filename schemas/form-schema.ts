@@ -3,9 +3,12 @@ import * as z from "zod"
 export const weighBridgeSchema = z.object({
   serialNo: z.string().min(1, "Serial number is required"),
   vehicleNo: z.string().min(1, "Vehicle number is required"),
-  vehicleType: z.string().min(1, "Vehicle type is required"),
+  // vehicleType: z.string().min(1, "Vehicle type is required"),
+  vehicleType: z.string().optional(),
+
   charges: z.string().min(1, "Charges are required"),
-  material: z.string().min(1, "Material is required"),
+  // material: z.string().min(1, "Material is required"),
+  material: z.string().optional(),
   partyRef: z.string().optional(),
   payment: z.string().min(1, "Payment details are required"),
   driver: z.string().min(1, "Driver name is required"),
@@ -17,4 +20,3 @@ export const weighBridgeSchema = z.object({
   outDate: z.string().min(1, "Out date is required"),
   outTime: z.string().min(1, "Out time is required"),
 })
-
