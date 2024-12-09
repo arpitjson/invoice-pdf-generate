@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
   },
   receiptContainer: {
-    marginBottom: 50,
+    marginBottom: 40,
   },
   header: {
     marginBottom: 10,
