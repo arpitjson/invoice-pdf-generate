@@ -165,4 +165,3 @@ export function PDFTemplate({ data }: PDFTemplateProps) {
     </Document>
   )
 }
-
