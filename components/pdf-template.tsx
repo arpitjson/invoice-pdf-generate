@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   colon: {
-    width: 8,
+    width: 4,
     marginRight: 2,
   },
   value: {
