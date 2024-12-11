@@ -151,7 +151,7 @@ const Receipt = ({ data }: PDFTemplateProps) => (
         <Text style={styles.colon}>:</Text>
         <Text style={styles.weightValue}>{data.grossWeight} Kg</Text>
         <Text style={styles.centerText}>
-          {data.inDate}, {data.inTime}
+          {data.inDate}, {data.outTime}
         </Text>
       </View>
       <View style={styles.weightRow}>
@@ -159,7 +159,7 @@ const Receipt = ({ data }: PDFTemplateProps) => (
         <Text style={styles.colon}>:</Text>
         <Text style={styles.weightValue}>{data.tareWeight} Kg</Text>
         <Text style={styles.centerText}>
-          {data.outDate}, {data.outTime}
+          {data.outDate}, {data.inTime}
         </Text>
       </View>
       <View style={styles.weightRow}>
