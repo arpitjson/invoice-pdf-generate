@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    width: 100,
+    width: 70,
     textTransform: 'uppercase',
   },
   colon: {
-    width: 5,
-    marginRight: 1,
+    width: 8,
+    marginRight: 2,
   },
   value: {
     flex: 1,
